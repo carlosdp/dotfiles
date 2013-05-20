@@ -3,10 +3,13 @@ let mapleader = ","
 call pathogen#infect()
 filetype plugin indent on
 set t_Co=256
+set ts=2
 set backspace=2
 set number
 set hlsearch
 set expandtab
+set shiftwidth=2
+set softtabstop=2
 set autoindent
 set noswapfile
 set shell=bash
