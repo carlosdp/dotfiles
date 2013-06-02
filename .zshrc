@@ -10,6 +10,9 @@ ZSH_THEME="hmind"
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
 alias ohmyzsh="mate ~/.oh-my-zsh"
+alias tmux="TERM=screen-256color-bce tmux"
+alias ta="tmux attach"
+alias tnew="tmux new -s"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -38,7 +41,8 @@ export PATH=/usr/texbin:~/scala/bin/:/opt/local/bin:/opt/local/sbin:/Users/hmind
 export PATH=~/cc0/bin:$PATH
 alias mate='open -a TextMate.app'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
-export PATH=/usr/local/git/bin:$PATH
+export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
+export NODE_PATH="/usr/local/lib/node"
 
 ##
 # Your previous /Users/hmind/.bash_profile file was backed up as /Users/hmind/.bash_profile.macports-saved_2011-08-04_at_11:32:04
