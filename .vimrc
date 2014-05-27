@@ -1,12 +1,15 @@
-syntax enable
+" Enable Go highlighting
+filetype off
+filetype plugin indent off
+set rtp+=$HOME/gocode/misc
+filetype plugin indent on
+syntax on
 let mapleader = ","
 call pathogen#infect()
-filetype plugin indent on
 set t_Co=256
 set ts=2
 set backspace=2
 set number
-set hlsearch
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -22,6 +25,8 @@ set wildmenu
 set t_Co=256 " 256 colors
 set background=dark
 colorscheme twilight256
+
+" nnoremap <leader>w :GundoToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
