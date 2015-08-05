@@ -13,6 +13,8 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 alias tmux="TERM=screen-256color-bce tmux"
 alias ta="tmux attach"
 alias tnew="tmux new -s"
+alias git="hub"
+alias f="fleetctl"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -35,14 +37,18 @@ alias tnew="tmux new -s"
 plugins=(git bundler gem stugov 15122)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+
+export GOPATH=~/go
 
 # Customize to your needs...
-export PATH=/usr/texbin:~/scala/bin/:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin
+export PATH=/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin
 export PATH=~/cc0/bin:$PATH
 alias mate='open -a TextMate.app'
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
 export NODE_PATH="/usr/local/lib/node"
+export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-6.5/lib:$DYLD_LIBRARY_PATH
 
 ##
 # Your previous /Users/hmind/.bash_profile file was backed up as /Users/hmind/.bash_profile.macports-saved_2011-08-04_at_11:32:04
@@ -58,3 +64,25 @@ export PATH
 export ORACLE_HOME=~/oracle/instantclient
 export ORACLE_BASE=~/oracle/instantclient
 export LD_LIBRARY_PATH=~/oracle/instantclient
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+source '/Users/mozilla/google-cloud-sdk/path.zsh.inc'
+
+# The next line enables bash completion for gcloud.
+source '/Users/mozilla/google-cloud-sdk/completion.zsh.inc'
+
+export DOCKER_HOST="tcp://192.168.59.103:2375"
+export FLEETCTL_TUNNEL="lunicy.com"
+
+# added by travis gem
+[ -f /Users/mozilla/.travis/travis.sh ] && source /Users/mozilla/.travis/travis.sh
+
+# OPAM configuration
+. /Users/mozilla/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

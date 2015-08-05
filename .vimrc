@@ -1,7 +1,8 @@
 " Enable Go highlighting
 filetype off
 filetype plugin indent off
-set rtp+=$HOME/gocode/misc
+set rtp+=/usr/local/go/misc/vim
+set rtp+=$HOME/code/rust/src/etc/vim
 filetype plugin indent on
 syntax on
 let mapleader = ","
@@ -20,6 +21,7 @@ set scrolloff=3
 set wildmode=longest,list
 " make tab completion for files/buffers act like bash
 set wildmenu
+set timeoutlen=1000 ttimeoutlen=0
 
 " COLOR SCHEME
 set t_Co=256 " 256 colors
@@ -108,3 +110,8 @@ function! RunTests(filename)
         end
     end
 endfunction
+
+source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+set laststatus=2
+au BufNewFile,BufRead *.jsm setlocal ft=JavaScript " JSM
+au BufNewFile,BufRead *.sjs setlocal ft=JavaScript " SJS
