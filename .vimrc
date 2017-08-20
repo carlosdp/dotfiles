@@ -1,8 +1,9 @@
 " Enable Go highlighting
 filetype off
 filetype plugin indent off
-set rtp+=/usr/local/go/misc/vim
-set rtp+=$HOME/code/rust/src/etc/vim
+" set rtp+=/usr/local/go/misc/vim
+" set rtp+=$HOME/code/rust/src/etc/vim
+set rtp+=~/.vim/bundle/Vundle.vim
 filetype plugin indent on
 syntax on
 let mapleader = ","
@@ -111,7 +112,6 @@ function! RunTests(filename)
     end
 endfunction
 
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 set laststatus=2
 au BufNewFile,BufRead *.jsm setlocal ft=JavaScript " JSM
 au BufNewFile,BufRead *.sjs setlocal ft=JavaScript " SJS

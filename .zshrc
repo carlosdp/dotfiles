@@ -1,3 +1,8 @@
+# https://stackoverflow.com/questions/26462667/git-completion-not-working-in-zsh-on-os-x-yosemite-with-homebrew
+fpath=(~/.zsh/completions $fpath) 
+autoload -U compinit && compinit
+zmodload -i zsh/complist
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -5,7 +10,8 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="hmind"
+# ZSH_THEME="hmind"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Example aliases
 alias zshconfig="mate ~/.zshrc"
@@ -15,6 +21,12 @@ alias ta="tmux attach"
 alias tnew="tmux new -s"
 alias git="hub"
 alias f="fleetctl"
+
+# GIT
+alias g="git"
+alias gc="g commit"
+alias glg="g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gst="g status"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -34,12 +46,13 @@ alias f="fleetctl"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler gem stugov 15122)
+plugins=(bundler gem stugov 15122)
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 export GOPATH=~/go
+
+export GITHUB_ACCESS_TOKEN="cb42eec6cd4057aa62d0f488771d314fd84d0fa5"
 
 # Customize to your needs...
 export PATH=/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin
@@ -70,19 +83,15 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/mozilla/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables bash completion for gcloud.
-source '/Users/mozilla/google-cloud-sdk/completion.zsh.inc'
-
-export DOCKER_HOST="tcp://192.168.59.103:2375"
-export FLEETCTL_TUNNEL="lunicy.com"
-
 # added by travis gem
 [ -f /Users/mozilla/.travis/travis.sh ] && source /Users/mozilla/.travis/travis.sh
 
 # OPAM configuration
 . /Users/mozilla/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export GITHUB_ENTERPRISE_DOMAIN="code.hq.twilio.com"
+
+alias ghe="GITHUB_HOST=$GITHUB_ENTERPRISE_DOMAIN git"
+

@@ -113,7 +113,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
 Plugin 'sjl/gundo.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
@@ -122,6 +121,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Shougo/neocomplcache.vim'
 Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
+Plugin 'vim-airline/vim-airline'
 call vundle#end()
 
 nnoremap <leader>w :GundoToggle<CR>
@@ -132,7 +132,6 @@ highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
 
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 set laststatus=2
 au BufNewFile,BufRead *.jsm setlocal ft=JavaScript " JSM
 au BufNewFile,BufRead *.sjs setlocal ft=JavaScript " SJS
