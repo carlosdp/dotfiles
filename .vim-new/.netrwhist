@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/mozilla/go/src/github.com/carlosdp/harbor'
-let g:netrw_dirhist_2='/Users/mozilla/go/src/github.com/carlosdp/harbor/image'
-let g:netrw_dirhist_3='/Users/mozilla/go/src/github.com/carlosdp/harbor/git-puller'
-let g:netrw_dirhist_4='/Users/mozilla/go/src/github.com/carlosdp/harbor/chain'
-let g:netrw_dirhist_5='/Users/mozilla/go/src/github.com/carlosdp/tomorrow/migrations'
-let g:netrw_dirhist_6='/Users/mozilla/code/blender-build/blender/source/blender/blenkernel'
-let g:netrw_dirhist_7='/Users/mozilla/code/blender-build/blender/source/blender/blenkernel/intern'
