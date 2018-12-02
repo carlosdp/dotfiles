@@ -19,14 +19,6 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 alias tmux="TERM=screen-256color-bce tmux"
 alias ta="tmux attach"
 alias tnew="tmux new -s"
-alias git="hub"
-alias f="fleetctl"
-
-# GIT
-alias g="git"
-alias gc="g commit"
-alias glg="g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gst="g status"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -48,20 +40,32 @@ alias gst="g status"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(bundler gem stugov 15122)
 
-source $ZSH/oh-my-zsh.sh
-
 export GOPATH=~/go
 
 export GITHUB_ACCESS_TOKEN="cb42eec6cd4057aa62d0f488771d314fd84d0fa5"
 
 # Customize to your needs...
-export PATH=/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin
-export PATH=~/cc0/bin:$PATH
-alias mate='open -a TextMate.app'
+export PATH=/usr/local/opt/python/libexec/bin:/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
 export NODE_PATH="/usr/local/lib/node"
 export DYLD_LIBRARY_PATH=/Developer/NVIDIA/CUDA-6.5/lib:$DYLD_LIBRARY_PATH
+
+# This needs to be *after* hub is loaded or *before* it is aliased, or git_compare_version errors on load
+source $ZSH/oh-my-zsh.sh
+
+eval "$(hub alias -s)"
+
+# GIT
+alias g="git"
+alias gc="g commit"
+alias glg="g log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gst="g status"
+alias gp="g push"
+alias gps="gp --set-upstream"
+alias gpo="gp origin"
+alias gpso="g push --set-upstream origin"
+alias ga="g add"
 
 ##
 # Your previous /Users/hmind/.bash_profile file was backed up as /Users/hmind/.bash_profile.macports-saved_2011-08-04_at_11:32:04
@@ -91,7 +95,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-export GITHUB_ENTERPRISE_DOMAIN="code.hq.twilio.com"
-
-alias ghe="GITHUB_HOST=$GITHUB_ENTERPRISE_DOMAIN git"
+source $HOME/software/z.sh
 

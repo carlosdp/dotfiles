@@ -28,9 +28,24 @@ set foldmethod=indent   " fold based on indent level
 
 " COLOR SCHEME
 set t_Co=256 " 256 colors
-set background=light
+set background=dark
 colorscheme lucius
 
+" Tab Navigation
+" https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 filetype off
 """"" VUNDLE ~~~~~~~~~
@@ -55,6 +70,9 @@ Plugin 'jparise/vim-graphql'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
+Plugin 'embear/vim-localvimrc'
+Plugin 'dyng/ctrlsf.vim'
+Plugin 'zxqfl/tabnine-vim'
 call vundle#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
@@ -73,6 +91,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
 \ 'typescript': ['tslint', 'tsserver', 'typecheck'],
+\ 'javascript': ['eslint'],
 \ 'rust': ['rls'],
 \}
 
@@ -87,9 +106,18 @@ au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
 let g:ale_rust_rls_toolchain = 'stable'
+let g:ale_lint_on_text_changed = 'normal'
+" TODO: Might want to scope to Typescript only
+let g:ale_lint_delay = 500
+let g:ale_completion_delay = 200
+let g:ale_open_list = 0
+let g:ale_echo_msg_format = '[%linter%] %s'
 
 " vim-jsx
 let g:jsx_ext_required = 0
+
+" YCM
+let g:ycm_show_diagnostics_ui = 0
 
 " Undo List
 nnoremap <leader>w :GundoToggle<CR>
@@ -103,4 +131,8 @@ highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
+
+" Local lvimrc loading
+let g:localvimrc_ask = 0
+let g:localvimrc_sandbox = 0
 

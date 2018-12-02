@@ -45,3 +45,5 @@ tags
 # Persistent undo
 [._]*.un~
 
+.oh-my-zsh/cache
+.vim/view
