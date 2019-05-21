@@ -58,7 +58,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-commentary'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'fatih/vim-go'
+" Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'leafgarland/typescript-vim'
@@ -69,10 +69,10 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'jparise/vim-graphql'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-surround'
-Plugin 'valloric/youcompleteme'
+" Plugin 'valloric/youcompleteme'
 Plugin 'embear/vim-localvimrc'
 Plugin 'dyng/ctrlsf.vim'
-Plugin 'zxqfl/tabnine-vim'
+" Plugin 'zxqfl/tabnine-vim'
 call vundle#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
@@ -87,6 +87,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 " ALE
 let g:ale_fixers = {
 \ 'typescript': ['tslint'],
+\ 'rust': ['rustfmt'],
 \}
 
 let g:ale_linters = {
@@ -100,7 +101,7 @@ let g:ale_fix_on_save = 1
 " Rust
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = "cargo fmt -- "
-let g:ale_rust_cargo_use_check = 1
+" let g:ale_rust_cargo_use_check = 1
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
@@ -136,3 +137,7 @@ highlight GitGutterChangeDelete ctermfg=yellow
 let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
 
+" Clear Search
+nnoremap <CR> :noh<CR><CR>
+
+autocmd BufNewFile,BufRead *.rs set filetype=rust
