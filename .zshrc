@@ -26,8 +26,12 @@ export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
 export PATH=$PATH:$HOME/.cargo/bin
 export NODE_PATH="/usr/local/lib/node"
 
-export ANDROID_SDK_ROOT=~/Android/Sdk
+export ANDROID_SDK_ROOT=~/Library/Android/sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:"/opt/gradle-5.4.1/bin"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # eval "$(hub alias -s)"
 
@@ -41,15 +45,22 @@ alias gps="gp --set-upstream"
 alias gpo="gp origin"
 alias gpso="g push --set-upstream origin"
 alias ga="g add"
+alias todo="vim ~/.todos"
 
 alias vim="nvim"
 
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-open() {
-  setsid nohup xdg-open $1 > /dev/null 2> /dev/null
-}
+# open() {
+#   setsid nohup xdg-open $1 > /dev/null 2> /dev/null
+# }
 
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
+# alias pbcopy='xclip -selection clipboard'
+# alias pbpaste='xclip -selection clipboard -o'
 
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
+export PATH=$PATH:/Applications/Julia-1.2.app/Contents/Resources/julia/bin
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+
+source ~/.secrets

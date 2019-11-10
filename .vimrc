@@ -69,10 +69,11 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'jparise/vim-graphql'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-surround'
-" Plugin 'valloric/youcompleteme'
+Plugin 'valloric/youcompleteme'
 Plugin 'embear/vim-localvimrc'
 Plugin 'dyng/ctrlsf.vim'
-" Plugin 'zxqfl/tabnine-vim'
+Plugin 'zxqfl/tabnine-vim'
+Plugin 'tomlion/vim-solidity'
 call vundle#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
@@ -82,16 +83,16 @@ map <leader>f :CtrlP<cr>
 map <leader>bf :CtrlPMixed<cr>
 let g:ctrlp_custom_ignore = 'target'
 
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard | if (test -a .ctrlpignore); then grep -v "`cat .ctrlpignore`"; else cat; fi']
 
 " ALE
 let g:ale_fixers = {
-\ 'typescript': ['tslint'],
+\ 'typescript': ['eslint'],
 \ 'rust': ['rustfmt'],
 \}
 
 let g:ale_linters = {
-\ 'typescript': ['tslint', 'tsserver', 'typecheck'],
+\ 'typescript': ['eslint', 'tsserver', 'typecheck'],
 \ 'javascript': ['eslint'],
 \ 'rust': ['rls'],
 \}

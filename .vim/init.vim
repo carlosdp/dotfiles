@@ -1,1 +1,1 @@
-/home/hmind2005/.dotfiles/.vimrc
+/Users/carlosdp/.dotfiles/.vimrc
