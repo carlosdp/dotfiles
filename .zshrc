@@ -33,7 +33,7 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:"/opt
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# eval "$(hub alias -s)"
+eval "$(hub alias -s)"
 
 # GIT
 alias g="git"

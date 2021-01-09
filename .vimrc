@@ -31,6 +31,38 @@ set t_Co=256 " 256 colors
 set background=dark
 colorscheme lucius
 
+" Additional Settings for CoC
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Tab Navigation
 " https://superuser.com/questions/410982/in-vim-how-can-i-quickly-switch-between-tabs
 noremap <leader>1 1gt
@@ -49,32 +81,33 @@ vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 filetype off
 """"" VUNDLE ~~~~~~~~~
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'sjl/gundo.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-commentary'
-Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'fatih/vim-go'
-Plugin 'rizzatti/dash.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'ianks/vim-tsx'
-Plugin 'Shougo/vimproc'
-Plugin 'w0rp/ale'
-Plugin 'rust-lang/rust.vim'
-Plugin 'jparise/vim-graphql'
-Plugin 'mxw/vim-jsx'
-Plugin 'tpope/vim-surround'
-Plugin 'valloric/youcompleteme'
-Plugin 'embear/vim-localvimrc'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'zxqfl/tabnine-vim'
-Plugin 'tomlion/vim-solidity'
-call vundle#end()
+call plug#begin('~/.vim/bundle')
+Plug 'gmarik/Vundle.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'fisadev/vim-ctrlp-cmdpalette'
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+Plug 'nathanaelkane/vim-indent-guides'
+" Plin 'fatih/vim-go'
+Plug 'rizzatti/dash.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
+Plug 'Shougo/vimproc'
+Plug 'w0rp/ale'
+Plug 'rust-lang/rust.vim'
+Plug 'jparise/vim-graphql'
+Plug 'mxw/vim-jsx'
+Plug 'tpope/vim-surround'
+" Plug 'valloric/youcompleteme'
+Plug 'embear/vim-localvimrc'
+Plug 'dyng/ctrlsf.vim'
+" Plug 'zxqfl/tabnine-vim'
+Plug 'tomlion/vim-solidity'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
 
@@ -85,9 +118,13 @@ let g:ctrlp_custom_ignore = 'target'
 
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard | if (test -a .ctrlpignore); then grep -v "`cat .ctrlpignore`"; else cat; fi']
 
+" Command Palette
+map <leader>p :CtrlPCmdPalette<cr>
+let g:ctrlp_cmdpalette_execute = 1
+
 " ALE
 let g:ale_fixers = {
-\ 'typescript': ['eslint'],
+\ 'typescript': [],
 \ 'rust': ['rustfmt'],
 \}
 
