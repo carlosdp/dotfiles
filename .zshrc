@@ -33,7 +33,7 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:"/opt
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-eval "$(hub alias -s)"
+eval "$(hub alias -s zsh)"
 
 # GIT
 alias g="git"
@@ -49,7 +49,16 @@ alias todo="vim ~/.todos"
 
 alias vim="nvim"
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+case `uname` in
+  Darwin)
+    # commands for OS X go here
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ;;
+  Linux)
+    # commands for Linux go here
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  ;;
+esac
 
 # open() {
 #   setsid nohup xdg-open $1 > /dev/null 2> /dev/null
@@ -69,4 +78,6 @@ if [[ -a ~/.zshrc-local ]]; then
   source ~/.zshrc-local
 fi
 
-source ~/.secrets
+if [[ -a ~/.secrets ]]; then
+  source ~/.secrets
+fi

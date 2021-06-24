@@ -1,1 +1,1 @@
-/Users/carlosdp/.dotfiles/.vimrc
+/workspace/.dotfiles/.vimrc
