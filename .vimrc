@@ -107,6 +107,7 @@ Plug 'dyng/ctrlsf.vim'
 " Plug 'zxqfl/tabnine-vim'
 Plug 'tomlion/vim-solidity'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports

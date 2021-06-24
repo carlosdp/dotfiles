@@ -20,7 +20,7 @@ alias tnew="tmux new -s"
 export GOPATH=~/go
 
 # Customize to your needs...
-export PATH=/usr/local/opt/python/libexec/bin:/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin:$PATH
+export PATH=/usr/local/opt/python/libexec/bin:/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
 export PATH=$PATH:$HOME/.cargo/bin
@@ -62,5 +62,11 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 export PATH=$PATH:/Applications/Julia-1.2.app/Contents/Resources/julia/bin
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+# Helps with tsc --watch CPU usage
+export TSC_NONPOLLING_WATCHER=1
+
+if [[ -a ~/.zshrc-local ]]; then
+  source ~/.zshrc-local
+fi
 
 source ~/.secrets
