@@ -48,3 +48,4 @@ tags
 .oh-my-zsh/cache
 .vim/view
 .vim/autoload
+.vim/init.vim
