@@ -17,6 +17,6 @@ touch ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global
 if [ "$(uname)" != "Darwin" ]; then
 	sudo apt update
-	sudo apt install -y hub zsh-syntax-highlighting neovim
+	sudo apt install -y hub zsh-syntax-highlighting neovim tmux
 fi
 nvim --headless +PlugInstall +qa
