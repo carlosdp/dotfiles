@@ -179,4 +179,7 @@ let g:localvimrc_sandbox = 0
 " Clear Search
 nnoremap <CR> :noh<CR><CR>
 
+" Use double tick on iPad because no esc key
+imap `` <Esc>
+
 autocmd BufNewFile,BufRead *.rs set filetype=rust

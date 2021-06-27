@@ -20,3 +20,4 @@ if [ "$(uname)" != "Darwin" ]; then
 	sudo apt install -y hub zsh-syntax-highlighting neovim tmux
 fi
 nvim --headless +PlugInstall +qa
+nvim --headless -c "CocInstall coc-tsserver" +qa
