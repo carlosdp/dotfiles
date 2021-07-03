@@ -18,7 +18,7 @@ git config --global core.excludesfile ~/.gitignore_global
 if [ "$(uname)" != "Darwin" ]; then
 	sudo apt update
 	sudo apt install -y hub zsh-syntax-highlighting tmux ripgrep
-  wget https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage ~/nvim.appimage
+  wget https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage -O ~/nvim.appimage
   chmod u+x ~/nvim.appimage
   ~/nvim.appimage --appimage-extract
 fi
