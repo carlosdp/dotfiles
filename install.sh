@@ -26,4 +26,3 @@ if [ "$(uname)" != "Darwin" ]; then
 fi
 ~/squashfs-root/usr/bin/nvim --headless +PlugInstall +qa
 ~/squashfs-root/usr/bin/nvim --headless -c "CocInstall coc-tsserver" +qa
-zsh
