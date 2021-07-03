@@ -57,6 +57,7 @@ case `uname` in
   Linux)
     # commands for Linux go here
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    export PATH=~/squashfs-root/usr/bin:$PATH
   ;;
 esac
 

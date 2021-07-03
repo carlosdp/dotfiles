@@ -108,16 +108,16 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'tomlion/vim-solidity'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dart-lang/dart-vim-plugin'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
 
 " Command-T
-map <leader>f :CtrlP<cr>
-map <leader>bf :CtrlPMixed<cr>
-let g:ctrlp_custom_ignore = 'target'
-
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard | if (test -a .ctrlpignore); then grep -v "`cat .ctrlpignore`"; else cat; fi']
+noremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
+noremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 " Command Palette
 map <leader>p :CtrlPCmdPalette<cr>
