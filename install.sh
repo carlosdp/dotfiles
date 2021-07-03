@@ -22,6 +22,8 @@ if [ "$(uname)" != "Darwin" ]; then
   cd ~/
   chmod u+x nvim.appimage
   ./nvim.appimage --appimage-extract
+  cd -
 fi
-nvim --headless +PlugInstall +qa
-nvim --headless -c "CocInstall coc-tsserver" +qa
+~/squashfs-root/usr/bin/nvim --headless +PlugInstall +qa
+~/squashfs-root/usr/bin/nvim --headless -c "CocInstall coc-tsserver" +qa
+zsh
