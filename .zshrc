@@ -58,6 +58,8 @@ case `uname` in
     # commands for Linux go here
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     export PATH=~/squashfs-root/usr/bin:$PATH
+    export EXPO_MANIFEST_PROXY_URL="http://19000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
+    export EXPO_PACKAGER_PROXY_URL="https://19000-${GITPOD_WORKSPACE_ID}.${GITPOD_WORKSPACE_CLUSTER_HOST}"
   ;;
 esac
 
