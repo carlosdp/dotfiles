@@ -77,6 +77,9 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/H
 # Helps with tsc --watch CPU usage
 export TSC_NONPOLLING_WATCHER=1
 
+export EDITOR=nvim
+export GIT_EDITOR=nvim
+
 if [[ -a ~/.zshrc-local ]]; then
   source ~/.zshrc-local
 fi
