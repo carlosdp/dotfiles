@@ -49,4 +49,5 @@ set GIT_EDITOR nvim
 # MISC
 set TSC_NONPOLLING_WATCHER 1
 
+# Load secrets
 source $HOME/.secrets
