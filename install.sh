@@ -10,6 +10,8 @@ rm $HOME/.zshrc
 ln -s $DOTROOT/.zshrc $HOME/.zshrc
 ln -s $DOTROOT/.oh-my-zsh $HOME/.oh-my-zsh
 mkdir -p $HOME/.config
+rm -rf $HOME/.config/fish
+ln -s $DOTROOT/fish $HOME/.config/fish
 ln -s $DOTROOT/.vim $HOME/.config/nvim
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
