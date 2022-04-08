@@ -176,6 +176,7 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 
 " COC
 highlight CocErrorSign guifg=#a82424
+nmap <leader>rn <Plug>(coc-rename)
 
 " Git Gutter
 highlight clear SignColumn
