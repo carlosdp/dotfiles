@@ -20,7 +20,7 @@ alias tnew="tmux new -s"
 export GOPATH=~/go
 
 # Customize to your needs...
-export PATH=/usr/local/opt/python/libexec/bin:/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin:$PATH
+export PATH=/opt/homebrew/bin:/usr/local/opt/python/libexec/bin:/usr/texbin:~/scala/bin/:~/code/go/bin:/opt/local/bin:/opt/local/sbin:/Users/hmind/cc0/bin:/usr/local/git/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/hmind/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/hmind/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/usr/X11/bin:/usr/texbin:~/sdk/platform-tools:$GOPATH/bin:~/depot_tools:~/code/moz-git-tools:~/code/arc/arcanist/bin:/usr/local/cuda/bin:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 export PATH=/usr/local/git/bin:/user/local/share/npm/bin:$PATH
 export PATH=$PATH:$HOME/.cargo/bin
@@ -34,6 +34,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 eval "$(hub alias -s zsh)"
+
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
 
 # GIT
 alias g="git"
@@ -87,3 +89,6 @@ fi
 if [[ -a ~/.secrets ]]; then
   source ~/.secrets
 fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$PATH:/Users/carlosdp/.foundry/bin"

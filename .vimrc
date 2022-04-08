@@ -111,6 +111,8 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'hashivim/vim-terraform'
+Plug 'LnL7/vim-nix'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
@@ -125,12 +127,12 @@ let g:ctrlp_cmdpalette_execute = 1
 
 " ALE
 let g:ale_fixers = {
-\ 'typescript': [],
+\ 'typescript': ['eslint'],
 \ 'rust': ['rustfmt'],
 \}
 
 let g:ale_linters = {
-\ 'typescript': ['eslint', 'tsserver', 'typecheck'],
+\ 'typescript': ['eslint'],
 \ 'javascript': ['eslint'],
 \ 'rust': ['rls'],
 \}
@@ -162,9 +164,6 @@ let g:ycm_show_diagnostics_ui = 0
 " Undo List
 nnoremap <leader>w :GundoToggle<CR>
 
-" Brings up Dash on the term under cursor
-nnoremap <leader>d :Dash!<CR>
-
 " Git Gutter
 highlight clear SignColumn
 highlight GitGutterAdd ctermfg=green
@@ -179,7 +178,12 @@ let g:localvimrc_sandbox = 0
 " Clear Search
 nnoremap <CR> :noh<CR><CR>
 
-" Use double tick on iPad because no esc key
-imap `` <Esc>
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname != "Darwin\n"
+    " Use double tick on iPad because no esc key
+    imap `` <Esc>
+  endif
+endif
 
 autocmd BufNewFile,BufRead *.rs set filetype=rust
