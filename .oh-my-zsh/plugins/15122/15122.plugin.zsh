@@ -1,1 +1,0 @@
-alias coin='rlwrap coin'
