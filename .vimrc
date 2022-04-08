@@ -26,11 +26,6 @@ set foldnestmax=1
 nnoremap <space> za
 set foldmethod=indent   " fold based on indent level
 
-" COLOR SCHEME
-set t_Co=256 " 256 colors
-set background=dark
-colorscheme lucius
-
 " Additional Settings for CoC
 set nobackup
 set nowritebackup
@@ -98,9 +93,17 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
+
+" COLOR SCHEME
+set t_Co=256 " 256 colors
+set background=dark
+colorscheme nord
+set termguicolors
 
 " Telescope
 noremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -170,6 +173,9 @@ let g:ale_lint_delay = 500
 let g:ale_completion_delay = 200
 let g:ale_open_list = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
+
+" COC
+highlight CocErrorSign guifg=#a82424
 
 " Git Gutter
 highlight clear SignColumn
