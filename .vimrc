@@ -82,48 +82,29 @@ vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 filetype off
 """"" VUNDLE ~~~~~~~~~
 call plug#begin('~/.vim/bundle')
-Plug 'gmarik/Vundle.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'fisadev/vim-ctrlp-cmdpalette'
+" Plug 'gmarik/Vundle.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'nathanaelkane/vim-indent-guides'
-" Plin 'fatih/vim-go'
-Plug 'rizzatti/dash.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
-Plug 'Shougo/vimproc'
 Plug 'w0rp/ale'
-Plug 'rust-lang/rust.vim'
-Plug 'jparise/vim-graphql'
-Plug 'mxw/vim-jsx'
 Plug 'tpope/vim-surround'
-" Plug 'valloric/youcompleteme'
 Plug 'embear/vim-localvimrc'
-Plug 'dyng/ctrlsf.vim'
-" Plug 'zxqfl/tabnine-vim'
-Plug 'tomlion/vim-solidity'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'nvim-lua/popup.nvim'
+
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'hashivim/vim-terraform'
-Plug 'LnL7/vim-nix'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the Vundle imports
 
-" Command-T
+" Telescope
 noremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
 noremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
-
-" Command Palette
-map <leader>p :CtrlPCmdPalette<cr>
-let g:ctrlp_cmdpalette_execute = 1
 
 " ALE
 let g:ale_fixers = {
@@ -138,6 +119,41 @@ let g:ale_linters = {
 \}
 
 let g:ale_fix_on_save = 1
+
+" Treesitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing
+  ignore_install = { },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
+    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
+    -- the name of the parser)
+    -- list of language that will be disabled
+    disable = { },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+
+  indent = {
+    enable = true,
+  },
+}
+EOF
 
 " Rust
 let g:rustfmt_autosave = 1
@@ -155,15 +171,6 @@ let g:ale_completion_delay = 200
 let g:ale_open_list = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
 
-" vim-jsx
-let g:jsx_ext_required = 0
-
-" YCM
-let g:ycm_show_diagnostics_ui = 0
-
-" Undo List
-nnoremap <leader>w :GundoToggle<CR>
-
 " Git Gutter
 highlight clear SignColumn
 highlight GitGutterAdd ctermfg=green
@@ -172,8 +179,8 @@ highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
 
 " Local lvimrc loading
-let g:localvimrc_ask = 0
-let g:localvimrc_sandbox = 0
+let g:localvimrc_ask = 1
+let g:localvimrc_sandbox = 1
 
 " Clear Search
 nnoremap <CR> :noh<CR><CR>
@@ -187,3 +194,4 @@ if has("unix")
 endif
 
 autocmd BufNewFile,BufRead *.rs set filetype=rust
+autocmd BufNewFile,BufRead *.sol set filetype=solidity
