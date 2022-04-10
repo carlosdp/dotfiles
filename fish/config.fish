@@ -5,9 +5,9 @@ end
 #### ALIASES
 
 # TMUX
-alias tmux="TERM=screen-256color-bce tmux"
-alias ta="tmux attach"
-alias tnew="tmux new -s"
+alias ctmux="TERM=screen-256color-bce tmux"
+alias ta="ctmux attach"
+alias tnew="ctmux new -s"
 
 # GIT
 alias g="git"
@@ -34,20 +34,20 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 #### EXPORTS
 
 # PATH
-set PATH /opt/homebrew/bin /usr/local/opt/python/libexec/bin /opt/local/bin /opt/local/sbin /usr/bin /bin /usr/sbin /sbin /usr/local/sbin /usr/local/bin $PATH
+set -gx PATH /opt/homebrew/bin /usr/local/opt/python/libexec/bin /opt/local/bin /opt/local/sbin /usr/bin /bin /usr/sbin /sbin /usr/local/sbin /usr/local/bin $PATH
 
 # Cargo
-set PATH $PATH $HOME/.cargo/bin
+set -gx PATH $PATH $HOME/.cargo/bin
 
 # Node
-set NODE_PATH "/usr/local/lib/node"
+set -gx NODE_PATH "/usr/local/lib/node"
 
 # Editors
-set EDITOR nvim
-set GIT_EDITOR nvim
+set -gx EDITOR nvim
+set -gx GIT_EDITOR nvim
 
 # MISC
-set TSC_NONPOLLING_WATCHER 1
+set -gx TSC_NONPOLLING_WATCHER 1
 
 # Load secrets
 source $HOME/.secrets

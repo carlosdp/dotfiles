@@ -111,13 +111,17 @@ noremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 " ALE
 let g:ale_fixers = {
-\ 'typescript': ['eslint'],
+\ 'typescript': [],
+\ 'typescriptreact': [],
+\ 'javascriptreact': [],
 \ 'rust': ['rustfmt'],
 \}
 
 let g:ale_linters = {
-\ 'typescript': ['eslint'],
-\ 'javascript': ['eslint'],
+\ 'typescript': [],
+\ 'javascript': [],
+\ 'typescriptreact': [],
+\ 'javascriptreact': [],
 \ 'rust': ['rls'],
 \}
 
