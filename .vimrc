@@ -97,6 +97,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'arcticicestudio/nord-vim'
 
 Plug 'norcalli/nvim-colorizer.lua'
+
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the plugin imports
@@ -193,6 +196,20 @@ highlight GitGutterAdd ctermfg=green
 highlight GitGutterChange ctermfg=yellow
 highlight GitGutterDelete ctermfg=red
 highlight GitGutterChangeDelete ctermfg=yellow
+
+" Bufferline (top tabs)
+lua <<EOF
+  vim.opt.termguicolors = true
+  require("bufferline").setup{
+    options = {
+      diagnostics = "coc",
+      diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        local icon = level:match("error") and " " or " "
+        return " " .. icon .. count
+      end
+    }
+  }
+EOF
 
 " Local lvimrc loading
 let g:localvimrc_ask = 1
