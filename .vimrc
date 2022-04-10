@@ -75,9 +75,8 @@ nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
 
 filetype off
-""""" VUNDLE ~~~~~~~~~
+""""" PLUGINS ~~~~~~~~~
 call plug#begin('~/.vim/bundle')
-" Plug 'gmarik/Vundle.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
@@ -94,10 +93,13 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" Color Scheme
 Plug 'arcticicestudio/nord-vim'
+
+Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 """" ~~~~~~~~~~~~~
-filetype plugin indent on " This MUST be after the Vundle imports
+filetype plugin indent on " This MUST be after the plugin imports
 
 " COLOR SCHEME
 set t_Co=256 " 256 colors
@@ -181,6 +183,9 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 " COC
 highlight CocErrorSign guifg=#a82424
 nmap <leader>rn <Plug>(coc-rename)
+
+" Colorizer (shows colors when using hex codes and such)
+lua require'colorizer'.setup()
 
 " Git Gutter
 highlight clear SignColumn
