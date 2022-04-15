@@ -100,6 +100,9 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+Plug 'pwntester/octo.nvim'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the plugin imports
@@ -199,16 +202,45 @@ highlight GitGutterChangeDelete ctermfg=yellow
 
 " Bufferline (top tabs)
 lua <<EOF
-  vim.opt.termguicolors = true
-  require("bufferline").setup{
-    options = {
-      diagnostics = "coc",
-      diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local icon = level:match("error") and " " or " "
-        return " " .. icon .. count
-      end
-    }
+vim.opt.termguicolors = true
+require("bufferline").setup{
+  options = {
+    mode = "tabs",
+    diagnostics = "coc",
+    diagnostics_indicator = function(count, level, diagnostics_dict, context)
+      local icon = level:match("error") and " " or " "
+      return " " .. icon .. count
+    end
   }
+}
+EOF
+
+" Galaxyline
+" lua require('./galaxyline')
+" lua <<EOF
+" local colors = require('galaxyline.colors')
+
+" require('galaxyline').section.left[1]= {
+"   FileSize = {
+"     provider = 'FileSize',
+"     condition = function()
+"       if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+"           return true
+"       end
+"       return false
+"     end,
+"     icon = '   ',
+"     highlight = {colors.green,colors.purple},
+"     separator = '',
+"     separator_highlight = {colors.purple,colors.darkblue},
+"   }
+" }
+" EOF
+
+" Octo
+lua <<EOF
+require'octo'.setup({
+})
 EOF
 
 " Local lvimrc loading
