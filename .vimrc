@@ -103,6 +103,15 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 Plug 'pwntester/octo.nvim'
+
+Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'folke/which-key.nvim'
+Plug 'phaazon/hop.nvim'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
+Plug 'iden3/vim-circom-syntax'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the plugin imports
@@ -114,7 +123,7 @@ colorscheme nord
 set termguicolors
 
 " Telescope
-noremap <leader>f <cmd>lua require('telescope.builtin').find_files()<cr>
+noremap <leader>f <cmd>lua require('telescope.builtin').git_files({ file_ignore_patterns = { ".yarn/cache/.*" } })<cr>
 noremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
 
 " ALE
@@ -139,7 +148,8 @@ let g:ale_fix_on_save = 1
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
+  ensure_installed = { "c", "lua", "rust", "typescript", "tsx",
+    "javascript", "jsdoc", "solidity", "python", "ruby" },
 
   -- Install languages synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -243,6 +253,17 @@ require'octo'.setup({
 })
 EOF
 
+" nvim-tree
+lua require'nvim-tree'.setup {}
+noremap z <cmd>NvimTreeToggle<cr>
+
+" Which Key
+lua require'which-key'.setup {}
+
+" Hop
+lua require'hop'.setup {}
+noremap q <cmd>HopWord<cr>
+
 " Local lvimrc loading
 let g:localvimrc_ask = 1
 let g:localvimrc_sandbox = 1
@@ -260,3 +281,4 @@ endif
 
 autocmd BufNewFile,BufRead *.rs set filetype=rust
 autocmd BufNewFile,BufRead *.sol set filetype=solidity
+autocmd BufNewFile,BufRead *.mdx set filetype=tsx
