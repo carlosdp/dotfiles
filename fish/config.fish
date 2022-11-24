@@ -34,7 +34,7 @@ alias ibrew='arch -x86_64 /usr/local/bin/brew'
 #### EXPORTS
 
 # PATH
-set -gx PATH /opt/homebrew/bin /usr/local/opt/python/libexec/bin /opt/local/bin /opt/local/sbin /usr/bin /bin /usr/sbin /sbin /usr/local/sbin /usr/local/bin /usr/local/go/bin $PATH
+set -gx PATH /opt/homebrew/bin /usr/local/opt/python/libexec/bin /opt/local/bin /opt/local/sbin /usr/bin /bin /usr/sbin /sbin /usr/local/sbin /usr/local/bin /usr/local/go/bin /usr/local/share/dotnet/x64 $PATH
 
 # Cargo
 set -gx PATH $PATH $HOME/.cargo/bin

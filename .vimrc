@@ -82,7 +82,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'embear/vim-localvimrc'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -118,6 +118,9 @@ Plug 'phaazon/hop.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 Plug 'iden3/vim-circom-syntax'
+
+Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-spectre'
 call plug#end()
 """" ~~~~~~~~~~~~~
 filetype plugin indent on " This MUST be after the plugin imports
@@ -238,25 +241,66 @@ lua <<EOF
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
+
+    -- Auto Formatting
+    -- https://raw.githubusercontent.com/bennypowers/dotfiles/8f8168a32aef73654cc8de5baab61376b04d8ded/.vim/config/lsp.vim
+    if client.resolved_capabilities.document_formatting then
+      vim.cmd([[
+      augroup LspFormatting
+          autocmd! * <buffer>
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+      augroup END
+      ]])
+    end
   end
 
+  function disable_formatting(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    on_attach(client, bufnr)
+  end
+
+  function enable_formatting(client, bufnr)
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_range_formatting = true
+    on_attach(client, bufnr)
+  end
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  -- autocmd BufWritePre * :!{bash -c "while ![ -e $1 ]; do echo $1; sleep 0.1s; done"} %:p  
+
   -- cmp_nvim_lsp (Autocomplete for LSP)
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
   local lsp_flags = {
     -- This is the default in Nvim 0.7+
     debounce_text_changes = 150,
   }
+
+  local util = require 'lspconfig.util'
+  
   require('lspconfig')['tsserver'].setup{
-      on_attach = on_attach,
+      on_attach = disable_formatting,
       flags = lsp_flags,
       capabilities = capabilities,
   }
-
-  require('lspconfig')['solc'].setup{
-      on_attach = on_attach,
+  require('lspconfig')['eslint'].setup{
+      on_attach = enable_formatting,
       flags = lsp_flags,
+  }
+  require('lspconfig')['solidity'].setup{
+      root_dir = util.root_pattern('foundry.toml', 'hardhat.config.*', '.git'),
+      on_attach = enable_formatting,
+      flags = lsp_flags,
+  }
+  require('lspconfig')['csharp_ls'].setup{
+      on_attach = disable_formatting,
+      flags = lsp_flags,
+      capabilities = capabilities,
   }
 EOF
 
@@ -310,6 +354,9 @@ EOF
 
 " Colorizer (shows colors when using hex codes and such)
 lua require'colorizer'.setup()
+
+" Auto Pairs
+lua require("nvim-autopairs").setup()
 
 " Git Gutter
 highlight clear SignColumn
@@ -370,6 +417,9 @@ lua require'which-key'.setup {}
 " Hop
 lua require'hop'.setup {}
 noremap q <cmd>HopWord<cr>
+
+" Spectre
+nnoremap <leader>s <cmd>lua require('spectre').open()<CR>
 
 " Local lvimrc loading
 let g:localvimrc_ask = 1
