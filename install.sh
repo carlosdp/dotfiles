@@ -6,6 +6,9 @@ ln -s $DOTROOT/.vimrc $HOME/.vimrc
 ln -s $DOTROOT/.vimrc $DOTROOT/.vim/init.vim
 ln -s $DOTROOT/.vim $HOME/.vim
 ln -s $DOTROOT/.tmux.conf $HOME/.tmux.conf
+rm $HOME/.zshrc
+ln -s $DOTROOT/.zshrc $HOME/.zshrc
+ln -s $DOTROOT/.oh-my-zsh $HOME/.oh-my-zsh
 mkdir -p $HOME/.config
 rm -rf $HOME/.config/fish
 ln -s $DOTROOT/fish $HOME/.config/fish
