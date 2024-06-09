@@ -45,6 +45,9 @@ set -gx PATH $PATH $HOME/.foundry/bin
 # Node
 set -gx NODE_PATH "/usr/local/lib/node"
 
+# Flutter
+set -gx PATH $PATH $HOME/flutter/bin
+
 # Editors
 set -gx EDITOR nvim
 set -gx GIT_EDITOR nvim
@@ -53,4 +56,4 @@ set -gx GIT_EDITOR nvim
 set -gx TSC_NONPOLLING_WATCHER 1
 
 # Load secrets
-source $HOME/.secrets
+source $HOME/.secrets.fish

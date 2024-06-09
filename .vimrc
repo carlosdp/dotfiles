@@ -82,16 +82,23 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
-" Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'embear/vim-localvimrc'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lspconfig'
+
 Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'mrcjkb/rustaceanvim'
+Plug 'L3MON4D3/LuaSnip'
+
+Plug 'folke/trouble.nvim'
+
+" CMP
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-path'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -104,11 +111,11 @@ Plug 'arcticicestudio/nord-vim'
 
 Plug 'norcalli/nvim-colorizer.lua'
 
-Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
-Plug 'pwntester/octo.nvim'
+" Plug 'pwntester/octo.nvim'
 
 Plug 'kyazdani42/nvim-tree.lua'
 
@@ -132,26 +139,8 @@ colorscheme nord
 set termguicolors
 
 " Telescope
-noremap <leader>f <cmd>lua require('telescope.builtin').git_files({ file_ignore_patterns = { ".yarn/cache/.*" } })<cr>
+noremap <leader>f <cmd>lua require('telescope.builtin').find_files({ file_ignore_patterns = { ".yarn/cache/.*" } })<cr>
 noremap <leader>g <cmd>lua require('telescope.builtin').live_grep()<cr>
-
-" ALE
-let g:ale_fixers = {
-\ 'typescript': [],
-\ 'typescriptreact': [],
-\ 'javascriptreact': [],
-\ 'rust': ['rustfmt'],
-\}
-
-let g:ale_linters = {
-\ 'typescript': [],
-\ 'javascript': [],
-\ 'typescriptreact': [],
-\ 'javascriptreact': [],
-\ 'rust': ['rls'],
-\}
-
-let g:ale_fix_on_save = 1
 
 " Treesitter
 lua << EOF
@@ -190,20 +179,13 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 " Rust
-let g:rustfmt_autosave = 1
-let g:rustfmt_command = "cargo fmt -- "
+" let g:rustfmt_autosave = 1
+" let g:rustfmt_command = "cargo fmt -- "
 " let g:ale_rust_cargo_use_check = 1
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap gs <Plug>(rust-def-split)
 au FileType rust nmap gx <Plug>(rust-def-vertical)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
-let g:ale_rust_rls_toolchain = 'stable'
-let g:ale_lint_on_text_changed = 'normal'
-" TODO: Might want to scope to Typescript only
-let g:ale_lint_delay = 500
-let g:ale_completion_delay = 200
-let g:ale_open_list = 0
-let g:ale_echo_msg_format = '[%linter%] %s'
 
 " COC
 " highlight CocErrorSign guifg=#a82424
@@ -237,21 +219,20 @@ lua <<EOF
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, bufopts)
     vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 
     -- Auto Formatting
     -- https://raw.githubusercontent.com/bennypowers/dotfiles/8f8168a32aef73654cc8de5baab61376b04d8ded/.vim/config/lsp.vim
-    if client.resolved_capabilities.document_formatting then
-      vim.cmd([[
-      augroup LspFormatting
-          autocmd! * <buffer>
-          autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-      augroup END
-      ]])
-    end
+    -- if client.resolved_capabilities.document_formatting then
+    --  vim.cmd([[
+    --  augroup LspFormatting
+    --      autocmd! * <buffer>
+    --      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+    --  augroup END
+    --  ]])
+    --end
   end
 
   function disable_formatting(client, bufnr)
@@ -267,7 +248,7 @@ lua <<EOF
   end
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- autocmd BufWritePre * :!{bash -c "while ![ -e $1 ]; do echo $1; sleep 0.1s; done"} %:p  
@@ -275,6 +256,38 @@ lua <<EOF
   -- cmp_nvim_lsp (Autocomplete for LSP)
   -- local capabilities = vim.lsp.protocol.make_client_capabilities()
   -- capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+  vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+  })
+
+--  vim.cmd([[
+--    set signcolumn=yes
+--    autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+--  ]])
+
+  vim.api.nvim_create_augroup('AutoFormatting', {})
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = '*.rs',
+    group = 'AutoFormatting',
+    callback = function()
+      vim.lsp.buf.format({ async = false })
+    end,
+  })
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent=true, noremap=true })
+  vim.keymap.set('n', '<leader>d', function() vim.cmd.RustLsp('openDocs') end, { silent=true, noremap=true })
+  local trouble = require('trouble')
+  vim.keymap.set('n', '<leader>x', function() trouble.open('diagnostics') end, { silent=true, noremap=true })
 
   local lsp_flags = {
     -- This is the default in Nvim 0.7+
@@ -302,6 +315,18 @@ lua <<EOF
       flags = lsp_flags,
       capabilities = capabilities,
   }
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+      local bufnr = ev.buf
+      local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true)
+      end
+    end,
+  })
 EOF
 
 " Mason (auto installs LSP servers)
@@ -347,9 +372,48 @@ lua <<EOF
     }),
     sources = {
       { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
       { name = 'luasnip' },
+      { name = 'path' },
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    formatting = {
+        fields = {'menu', 'abbr', 'kind'},
+        format = function(entry, item)
+            local menu_icon ={
+                nvim_lsp = 'λ',
+                vsnip = '⋗',
+                buffer = 'Ω',
+                path = '🖫',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+        end,
     },
   }
+
+  --Set completeopt to have a better completion experience
+  -- :help completeopt
+  -- menuone: popup even when there's only one match
+  -- noinsert: Do not insert text until a selection is made
+  -- noselect: Do not select, force to select one from the menu
+  -- shortness: avoid showing extra messages when using completion
+  -- updatetime: set updatetime for CursorHold
+  vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
+  vim.opt.shortmess = vim.opt.shortmess + { c = true}
+  vim.api.nvim_set_option('updatetime', 300) 
+
+  -- Fixed column for diagnostics to appear
+  -- Show autodiagnostic popup on cursor hover_range
+  -- Goto previous / next diagnostic warning / error 
+  -- Show inlay_hints more frequently 
+  vim.cmd([[
+    set signcolumn=yes
+    autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+  ]])
 EOF
 
 " Colorizer (shows colors when using hex codes and such)
@@ -402,10 +466,10 @@ EOF
 " EOF
 
 " Octo
-lua <<EOF
-require'octo'.setup({
-})
-EOF
+" lua <<EOF
+" require'octo'.setup({
+" })
+" EOF
 
 " nvim-tree
 lua require'nvim-tree'.setup {}
