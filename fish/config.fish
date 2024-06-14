@@ -48,6 +48,9 @@ set -gx NODE_PATH "/usr/local/lib/node"
 # Flutter
 set -gx PATH $PATH $HOME/flutter/bin
 
+# NeoVim (WSL)
+set -gx PATH $PATH /opt/nvim-linux64/bin
+
 # Editors
 set -gx EDITOR nvim
 set -gx GIT_EDITOR nvim
